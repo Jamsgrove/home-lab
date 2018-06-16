@@ -1,0 +1,18 @@
+---
+- name: Examples of juniper_junos_command
+  hosts: home-lab
+  connection: local
+  gather_facts: no
+  roles:
+    - Juniper.junos
+
+  tasks:
+    - name: Execute single "show version" command.
+      juniper_junos_command:
+        commands: "show version"
+        port: 22
+      register: response
+
+    - name: Print the command output
+      debug:
+        var: response.stdout

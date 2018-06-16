@@ -1,0 +1,10 @@
+localhost ansible_connection=local
+
+
+[home-lab]
+CORE1
+
+
+[home-lab:vars]
+ansible_user=localuser
+ansible_ssh_pass=localpass1234
