@@ -1,0 +1,39 @@
+---
+- name: Apply configuration to Juniper box
+  hosts:
+    - pes
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+  vars_prompt:
+    - name: username
+      prompt: Junos Username
+      private: no
+    - name: password
+      prompt: Junos Password
+      private: yes
+
+  vars:
+    credentials:
+      host: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      port: 22
+
+  tasks:
+    - name: Load set, compare diff, commit check and then commit changes with comment
+      juniper_junos_config:
+        provider: "{{ credentials }}"
+        commit: true
+        diff: true
+        config_mode: private
+        check: true
+#        src: "config/main.set"
+        lines:
+          - "set system services something something"
+        load: 'set'
+        format: 'set'
+        comment: 'Config changes - JOB 73 - JVB'
+        ignore_warning: 'statement not found'
