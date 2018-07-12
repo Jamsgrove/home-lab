@@ -7,9 +7,9 @@
     - Juniper.junos
 
   tasks:
-    - name: 
-      juniper_junos_command:
-        commands: "show version"
+    - name: Get uptime
+      juniper_junos_rpc:
+        rpc: get-system-uptime-information
         port: 22
       register: response
 
