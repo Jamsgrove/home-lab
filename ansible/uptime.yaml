@@ -15,4 +15,4 @@
 
     - name: Print the command output
       debug:
-        var: response.stdout
+        var: response.stdout_lines
