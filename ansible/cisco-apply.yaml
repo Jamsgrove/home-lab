@@ -1,0 +1,16 @@
+---
+- name: Apply configuration to Cisco box
+  hosts:
+    - home-lab
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Diff
+      ios_config:
+        diff_against: intended
+        intended_config: "master.cfg"
+
+    - name: Backup running-confg
+      ios_config:
+        backup: yes
