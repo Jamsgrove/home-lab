@@ -12,10 +12,12 @@
       juniper_junos_rpc:
         timeout: 100
         port: 22
-        rpcs: "get-commit-information"
-        kwargs: "sequence-number=0"
+        rpcs: "get-interface-information"
+        kwargs:
+          - interface_name: "ge-0/0/0"
+            terse: True
       register: response
 
     - name: Print the command output
       debug:
-        var: response.stdout
+        var: response
