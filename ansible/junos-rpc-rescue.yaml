@@ -1,0 +1,21 @@
+---
+- name: Renew rescue configuration
+  hosts:
+    - home-lab
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Check when a configuration was last committed
+      juniper_junos_rpc:
+        timeout: 100
+        port: 22
+        rpcs: "get-commit-information"
+        kwargs: "sequence-number=0"
+      register: response
+
+    - name: Print the command output
+      debug:
+        var: response.stdout
